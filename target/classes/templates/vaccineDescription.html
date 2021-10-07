@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="inc/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Aşı Tanım</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div class="card mb-3">
+        <div class="card-body" style="background-color: #d7d8da">
+            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#petVaccineAddModel"><i class="fas fa-plus"></i> Pet Aşı Ekle</button>
+            <button type="button" class="btn btn-outline-primary" style="color: white" data-bs-toggle="modal" data-bs-target="#farmVaccineAddModel"><i class="fas fa-plus"></i> Çiftlik Aşı Ekle</button>
+        </div>
+    </div>
+    <div class="main-card mb-3 card mainCart mb-3">
+        <div class="card-header cardHeader mb-3" style="background-color: #FDD835; color: white; font-family: Bahnschrift; font-size: larger">Aşılar</div>
+
+        <div class="row mt-3" style="padding-right: 15px; padding-left: 15px;">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3">
+            </div>
+
+
+
+        </div>
+
+        <div class="container">
+            <h4 style="color: #0F9DEF">Pet Aşı</h4>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Id</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Ürün Adı</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Barkodu</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Alış Fiyatı</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Satış Fiyatı</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Stok Ekle/Sil</th>
+                </tr>
+                </thead>
+                <tbody id="vaccine">
+
+                </tbody>
+
+            </table>
+        </div>
+
+        <div class="container">
+            <h4 style="color: #0F9DEF">Çiftlik Aşı</h4>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Id</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Ürün Adı</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Barkodu</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Alış Fiyatı</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Satış Fiyatı</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Stok Ekle/Sil</th>
+                </tr>
+                </thead>
+                <tbody id="farm">
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+    <div class="main-card mb-3 card mainCart mb-3">
+        <div class="card-header cardHeader mb-3" style="background-color: #FDD835; color: white; font-family: Bahnschrift; font-size: larger">Pet Aşı Stok Hareketi</div>
+        <div class="container">
+            <div class="mb-3 pl-3">
+                <label for="depoList" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Depo</label>
+                <select class="form-select" name="depoList" id="depoList">
+                    <option value="">Seçiniz</option>
+                    <option th:each="item,iter : ${depos}" th:value="${item.depo_id}" th:text="${item.depo_name}"/>
+                </select>
+            </div>
+            <table  class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Id</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Ürün Id</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Depo</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Kalan Stok</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Güncelle</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Sil</th>
+                </tr>
+                </thead>
+                <tbody id="depoRow">
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+    <div class="main-card mb-3 card mainCart mb-3">
+        <div class="card-header cardHeader mb-3" style="background-color: #FDD835; color: white; font-family: Bahnschrift; font-size: larger">Çiftlik Aşı Stok Hareketi</div>
+        <div class="container">
+            <div class="mb-3 pl-3">
+                <label for="dList" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Depo</label>
+                <select class="form-select" name="dList" id="dList">
+                    <option value="">Seçiniz</option>
+                    <option th:each="item,iter : ${depos}" th:value="${item.depo_id}" th:text="${item.depo_name}"/>
+                </select>
+            </div>
+            <table  class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Id</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Ürün Id</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Depo</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Kalan Stok</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Güncelle</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Sil</th>
+                </tr>
+                </thead>
+                <tbody id="dRow">
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+
+
+    <!--Pet Aşı Ekleme Başlangıç -->
+
+    <div class="modal fade" id="petVaccineAddModel" >
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #FDD835;">
+                    <h5 class="modal-title" style="color: white">Pet Aşı Ekle</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row p-3" id="petAdd">
+                        <div class="col-md-6 mb-3">
+                            <label for="pet_vaccine_name" class="form-label" style="font-size: large; font-family: Bahnschrift;color: #5c636a">Ürün Adı</label>
+                            <input type="text" name="pet_vaccine_name" id="pet_vaccine_name" class="form-control"  required />
+                        </div>
+                        <div class="col-md-6 mb-3">
+
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="pet_vaccine_unit" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Birim</label>
+                            <select class="form-select" name="pet_vaccine_unit" id="pet_vaccine_unit">
+                                <option value="">Seçiniz</option>
+                                <option value="1">Adet</option>
+                                <option value="2">Kutu</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="category_group_cg_id" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Kategori</label>
+                            <select class="form-select" name="category_group_cg_id" id="category_group_cg_id">
+                                <option value="">Seçiniz</option>
+                                <option th:each="item,iter : ${ls}" th:value="${item.cg_id}" th:text="${item.cg_name}"/>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label  class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Ürün Tipi</label>
+                            <selected class="form-select" name="pet_vaccine_type" id="pet_vaccine_type">
+                                <option value=" ">Pet Aşı</option>
+
+                            </selected>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="vendor_vid" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Tedarikçi</label>
+                            <select class="form-select" name="vendor_vid" id="vendor_vid">
+                                <option value="">Seçiniz</option>
+                                <option th:each="item,iter : ${ls1}" th:value="${item.vid}" th:text="${item.vendor_name}"/>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="pet_vaccine_barcode" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Ürün Barkod</label>
+                            <input type="number" name="pet_vaccine_barcode" id="pet_vaccine_barcode" class="form-control" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="pet_vaccine_code" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Ürün Kodu</label>
+                            <input type="number" name="pet_vaccine_code" id="pet_vaccine_code" class="form-control" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="pet_vaccine_kdv" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">KDV</label>
+                            <input type="number" name="pet_vaccine_kdv" id="pet_vaccine_kdv" class="form-control" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="pet_vaccine_buying" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Alış Fiyatı</label>
+                            <input type="number" name="pet_vaccine_buying" id="pet_vaccine_buying" class="form-control" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="pet_vaccine_sales" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Satış Fiyatı</label>
+                            <input type="number" name="pet_vaccine_sales" id="pet_vaccine_sales" class="form-control" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="pet_vaccine_stock" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Kritik Stok Miktarı</label>
+                            <input type="number" name="pet_vaccine_stock" id="pet_vaccine_stock" class="form-control" />
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="pet_vaccine_status" value=" ">
+                            <label class="form-check-label" for="pet_vaccine_status">Aktif</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="pet_vaccine_sales_kdv" value=" ">
+                            <label class="form-check-label" for="pet_vaccine_sales_kdv">Ürün satış fiyatına KDV dahil mi?</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="pet_vaccine_buying_kdv" value=" ">
+                            <label class="form-check-label" for="pet_vaccine_buying_kdv">Ürün alış fiyatına KDV dahil mi?</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="pet_vaccine_amount_fixed" value=" ">
+                            <label class="form-check-label" for="pet_vaccine_amount_fixed">Miktarlı satışlarda fiyat sabitlensin mi?</label>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="pet_vaccine_tip" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Tür</label>
+                            <select class="form-select" name="pet_vaccine_tip" id="pet_vaccine_tip">
+                                <option value="">Seçiniz</option>
+                                <option value="1">Kuduz</option>
+                                <option value="2">İç parazit</option>
+                                <option value="3">Gençlik</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="pet_vaccine_number" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Tekrar Sayısı</label>
+                            <select class="form-select" name="pet_vaccine_number" id="pet_vaccine_number">
+                                <option value="">Seçiniz</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <hr/>
+                        <div class="col-md-6 mb-3">
+                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Kapat</button>
+                            <button type="submit" class="btn btn-outline-danger" ><i class="fas fa-save"></i> Kaydet</button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--Pet Aşı Ekleme Son -->
+
+    <!--Çiftlik Aşı Ekleme Başlangıç -->
+
+    <div class="modal fade" id="farmVaccineAddModel" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#FDD835;">
+                    <h5 class="modal-title" style="color: white">Çiftlik Aşı Ekle</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row p-3" id="farmAdd">
+                        <div class="col-md-6 mb-3">
+                            <label for="farm_vaccine_name" class=" form-label" style="font-size: large; font-family: Bahnschrift;color: #5c636a">Ürün Adı</label>
+                            <input type="text" name="farm_vaccine_name" id="farm_vaccine_name" class="form-control"  required />
+                        </div>
+                        <div class="col-md-6 mb-3">
+
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="farm_vaccine_unit" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Birim</label>
+                            <select class="form-select" name="farm_vaccine_unit" id="farm_vaccine_unit">
+                                <option value="">Seçiniz</option>
+                                <option value="1">Kutu</option>
+                                <option value="2">Adet</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="category_group_cg_id" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Kategori</label>
+                            <select class="form-select" name="category_group_id" id="category_group_id">
+                                <option value="">Seçiniz</option>
+                                <option th:each="item,iter : ${ls}" th:value="${item.cg_id}" th:text="${item.cg_name}"/>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label  class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Ürün Tipi</label>
+                            <selected class="form-select" name="farm_vaccine_type" id="farm_vaccine_type">
+                                <option value="">Çiftlik Aşı</option>
+
+                            </selected>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="vendor_id" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Tedarikçi</label>
+                            <select class="form-select" name="vendor_id" id="vendor_id">
+                                <option value="">Seçiniz</option>
+                                <option th:each="item,iter : ${ls1}" th:value="${item.vid}" th:text="${item.vendor_name}"/>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="farm_vaccine_barcode" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Ürün Barkod</label>
+                            <input type="number" name="farm_vaccine_barcode" id="farm_vaccine_barcode" class="form-control" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="farm_vaccine_code" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Ürün Kodu</label>
+                            <input type="number" name="farm_vaccine_code" id="farm_vaccine_code" class="form-control" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="farm_vaccine_kdv" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">KDV</label>
+                            <input type="number" name="farm_vaccine_kdv" id="farm_vaccine_kdv" class="form-control" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="farm_vaccine_buying" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Alış Fiyatı</label>
+                            <input type="number" name="farm_vaccine_buying" id="farm_vaccine_buying" class="form-control" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="farm_vaccine_sales" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Satış Fiyatı</label>
+                            <input type="number" name="farm_vaccine_sales" id="farm_vaccine_sales" class="form-control" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="farm_vaccine_stock" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Kritik Stok Miktarı</label>
+                            <input type="number" name="farm_vaccine_stock" id="farm_vaccine_stock" class="form-control" />
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="farm_vaccine_status" value=" ">
+                            <label class="form-check-label" for="farm_vaccine_status">Aktif</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="farm_vaccine_buying_kdv" value=" ">
+                            <label class="form-check-label" for="farm_vaccine_buying_kdv">Ürün alış fiyatına KDV dahil mi?</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="farm_vaccine_sales_kdv" value=" ">
+                            <label class="form-check-label" for="farm_vaccine_sales_kdv">Ürün satış fiyatına KDV dahil mi?</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="farm_vaccine_amount_fixed" value=" ">
+                            <label class="form-check-label" for="farm_vaccine_amount_fixed">Miktarlı satışlarda fiyat sabitlensin mi?</label>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="farm_vaccine_tip" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Tür</label>
+                            <select class="form-select" name="farm_vaccine_tip" id="farm_vaccine_tip">
+                                <option value="">Seçiniz</option>
+                                <option value="1">Büyükbaş</option>
+                                <option value="2">Küçükbaş</option>
+                                <option value="3">Kümes</option>
+                            </select>
+                        </div>
+                        <hr/>
+                        <div class="col-md-6 mb-3">
+                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Kapat</button>
+                            <button type="submit" class="btn btn-outline-danger" ><i class="fas fa-save"></i> Kaydet</button>
+                        </div>
+
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--Çiftlik Aşı Ekleme Son-->
+    <div class="modal" id="petDetailModel" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#FDD835;">
+                    <h5 class="modal-title" style="color: white">Aşı Detay</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row ">
+                        <div class="col-md-3 mb-3">
+                            <label style="color: #0F9DEF"  class="form-label">Ürün Adı</label>
+                            <h4 style="color: black" id="p_name" class="form-text"></h4>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label   style="color: #0F9DEF" class="form-label">Durumu</label>
+                            <h4 style="color: black" id="p_status" class="form-text"></h4>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label  style="color: #0F9DEF"  class="form-label">Barkodu</label>
+                            <h4 style="color: black" id="p_barcode" class="form-text"></h4>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label  style="color: #0F9DEF" class="form-label">Birim</label>
+                            <h4 style="color: black" id="p_unit" class="form-text"></h4>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label  style="color: #0F9DEF" class="form-label">Ürün Kodu</label>
+                            <h4 style="color: black"  id="p_code" class="form-text"></h4>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label  style="color: #0F9DEF" class="form-label">Kategori</label>
+                            <h4 style="color: black"  id="category_group" class="form-text"></h4>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label  style="color: #0F9DEF" class="form-label">Ürün Tipi</label>
+                            <h4 style="color: black "  id="p_type" class="form-text"></h4>
+                        </div>
+
+                    </div>
+                    <hr/>
+                    <form class="row" id="stockAdd" name="stockAdd">
+                        <h5 class="modal-title" style="color: #0F9DEF">Stoklara Giriş Yap / Güncelle </h5>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="pet_vac" class="form-label">Ürün Id</label>
+                            <input type="text" id="pet_vac" class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="depo" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Depo *</label>
+                            <select class="form-select" name="depo" id="depo">
+                                <option value="">Seçiniz</option>
+                                <option th:each="item,iter : ${depos}" th:value="${item.depo_id}" th:text="${item.depo_name}"/>
+
+
+                            </select>
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="amount" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Miktar</label>
+                            <input type="number" name="amount" id="amount" class="form-control" />
+                        </div>
+
+                        <hr/>
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Kapat</button>
+                            <button type="submit" class="btn btn-outline-danger" ><i class="fas fa-save"></i> Ekle</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- son -->
+
+    <div class="modal" id="farmDetailModel" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:  #FDD835;">
+                    <h5 class="modal-title" style="color: white">Aşı Detay</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row ">
+                        <div class="col-md-3 mb-3">
+                            <label   style="color: #0F9DEF"class="form-label">Ürün Adı</label>
+                            <h4 style="color: black" id="pr_name" class="form-text"></h4>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label  style="color: #0F9DEF" class="form-label">Durumu</label>
+                            <h4 style="color: black" id="pr_status" class="form-text"></h4>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label  style="color: #0F9DEF" class="form-label">Barkodu</label>
+                            <h4 style="color: black" id="pr_barcode" class="form-text"></h4>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label  style="color: #0F9DEF" class="form-label">Birim</label>
+                            <h4 style="color: black" id="pr_unit" class="form-text"></h4>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label  style="color: #0F9DEF" class="form-label">Ürün Kodu</label>
+                            <h4 style="color: black"  id="pr_code" class="form-text"></h4>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label   style="color: #0F9DEF" class="form-label">Kategori</label>
+                            <h4 style="color: black"  id="category_gr" class="form-text"></h4>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label  style="color: #0F9DEF" class="form-label">Ürün Tipi</label>
+                            <h4 style="color: black "  id="pr_type" class="form-text"></h4>
+                        </div>
+
+                    </div>
+                    <hr/>
+                    <form class="row" id="fStockAdd" name="fStockAdd">
+                        <h5 class="modal-title" style="color: #0F9DEF">Stoklara Giriş Yap / Güncelle </h5>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="farm_vac" class="form-label">Ürün Id</label>
+                            <input type="text" id="farm_vac" class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="warehouse" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Depo *</label>
+                            <select class="form-select" name="warehouse" id="warehouse">
+                                <option value="">Seçiniz</option>
+                                <option th:each="item,iter : ${depos}" th:value="${item.depo_id}" th:text="${item.depo_name}"/>
+
+
+                            </select>
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="number" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Miktar</label>
+                            <input type="number" name="number" id="number" class="form-control" />
+                        </div>
+
+                        <hr/>
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Kapat</button>
+                            <button type="submit" class="btn btn-outline-danger" ><i class="fas fa-save"></i> Ekle</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</th:block>
+</body>
+</html>
+<script th:src="@{js/vaccineDescription.js}"></script>
+<script th:src="@{js/farmVaccine.js}"></script>

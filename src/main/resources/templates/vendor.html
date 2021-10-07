@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="inc/layout">
+<head>
+  <meta charset="UTF-8">
+  <title>Tedarikçi</title>
+  <link rel="stylesheet" th:href="@{/sitecss/vendor.css}">
+
+
+</head>
+<body>
+
+
+<th:block layout:fragment="content">
+
+  <div class="card mb-3">
+    <div class="card-body" style="background-color: #d7d8da">
+      <button type="button"  data-bs-toggle="modal" data-bs-target="#vendorModal" class="btn btn-outline-success mr-1"><i class="fas fa-plus"></i> Yeni Tedarikçi Ekle</button>
+    </div>
+  </div>
+  <div class="main-card mb-3 card mainCart mb-3">
+    <div class="card-header cardHeader mb-3" style="background-color: #E53935; color: white; font-family: Bahnschrift; font-size: larger">Tedarikçiler</div>
+
+    <div class="table-responsive">
+      <div class="container">
+      <table class="align-middle mb-3 table table-borderless table-striped table-hover">
+
+        <thead>
+        <tr>
+          <th>Id</th>
+          <th>Tedarikçi Adı</th>
+          <th>Tedarikçi email</th>
+          <th>Tedarikçi Telefon</th>
+          <th>Yönetim</th>
+
+
+        </tr>
+        </thead>
+        <tbody id="tableRow">
+
+        </tbody>
+
+      </table>
+      </div>
+    </div>
+
+
+
+
+  </div>
+  <div class="modal" tabindex="-1" id="vendorModal">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #E53935;">
+          <h5 class="modal-title" style="color:white;">Yeni Tedarikçi Ekle</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form  id="addVendor" name="addVendor" >
+            <div class="mb-3">
+              <label for="vendor" class="form-label">Tedarikçi İsmi/Ünvanı</label>
+              <input type="text" class="form-control" id="vendor" aria-describedby="emailHelp">
+
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">E-mail</label>
+              <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">Telefon Numarası</label>
+              <input type="number" class="form-control" id="phone">
+            </div>
+            <hr/>
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Kapat</button>
+            <button type="submit" class="btn btn-outline-primary"><i class="fas fa-save"></i> Kaydet</button>
+
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+</th:block>
+
+
+
+
+</body>
+
+</html>
+<script th:src="@{js/vendor.js}"></script>

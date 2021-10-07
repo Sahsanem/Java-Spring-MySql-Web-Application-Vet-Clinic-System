@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="inc/layout">
+<head>
+  <meta charset="UTF-8">
+  <title>Kasa Hareketleri</title>
+</head>
+<body>
+
+<th:block layout:fragment="content">
+
+
+  <div class="main-card mb-3 card mainCart">
+    <div class="card-header cardHeader" style="background-color: #D81B60; color: white; font-family: Bahnschrift; font-size: larger; " >Kasa Hareketleri</div>
+
+    <div class="row">
+
+
+
+    <div  class="btn-group col-md-4 mt-3 mx-3" role="group" aria-label="Basic mixed styles example">
+      <button style="border-top-left-radius: 20px; border-bottom-left-radius: 20px;" type="button" id="payIn" class="btn btn-outline-success">Para Girişi</button>
+      <button style="border-top-right-radius: 20px; border-bottom-right-radius: 20px;" type="button" id="payOut" class="btn btn-outline-danger">Para Çıkışı</button>
+    </div>
+
+    <div class="form-floating col-md-4 mt-3 mx-3 ">
+      <select class="form-select" id="Process" aria-label="Floating label select example">
+        <option value="1">Nakit</option>
+        <option value="2">Kredi Kartı</option>
+        <option value="3">Havale</option>
+      </select>
+      <label style="color: #0F9DEF" for="Process">Ödeme Yöntemleri</label>
+    </div>
+
+    </div>
+
+    <div class="row mt-3" style="padding-right: 15px; padding-left: 15px;">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-3"></div>
+      <div class="col-sm-3"></div>
+      <div class="col-sm-3">
+      </div>
+
+
+      <div class="table-responsive">
+        <table class="align-middle mb-3 table table-borderless table-striped table-hover">
+
+          <thead>
+          <tr>
+            <th>Id</th>
+            <th>Tarih</th>
+            <th>Fatura No</th>
+            <th>Tedarikçi</th>
+            <th>Ödeme Yöntemi</th>
+            <th>Net</th>
+
+          </tr>
+          </thead>
+
+          <tbody id="PayInRaw">
+
+
+          </tbody>
+
+
+
+
+        </table>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+
+
+</th:block>
+
+
+
+
+</body>
+</html>
+
+<script th:src="@{js/payAction.js}"></script>

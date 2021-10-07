@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="inc/layout">
+<head>
+  <meta charset="UTF-8">
+  <title>Alış</title>
+</head>
+<body>
+
+<th:block layout:fragment="content">
+
+
+  <div class="card mb-3">
+    <div class="card-body" style="background-color: #d7d8da">
+      <button type="button" data-bs-toggle="modal" data-bs-target="#registeredSupplier" class="btn btn-outline-danger mr-1"><i class="fas fa-money-bill-wave"></i> Kayıtlı Tedarikçiden Alış</button>
+      <button type="button" data-bs-toggle="modal" data-bs-target="#vendorModal" class="btn btn-outline-success mr-1"><i class="fas fa-money-bill-wave"></i> Yeni Tedarikçiden Alış</button>
+      <button type="button"  data-bs-toggle="modal" data-bs-target="#newProductAdd" class="btn btn-outline-primary mr-1"><i class="fas fa-money-bill-wave"></i> Hızlı Yeni Ürün Ekle</button>
+    </div>
+  </div>
+
+
+  <div class="main-card mb-3 card mainCart" >
+    <div class="card-header cardHeader" style="background-color: #E53935; color: white; font-family: Bahnschrift; font-size: larger; " >Alış</div>
+
+    <div class="row mt-3" style="padding-right: 15px; padding-left: 15px;">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-3"></div>
+      <div class="col-sm-3"></div>
+      <div class="col-sm-3">
+
+      </div>
+
+
+      <div class="table-responsive">
+        <table class="align-middle mb-3 table table-borderless table-striped table-hover">
+
+          <thead>
+          <tr>
+            <th>Id</th>
+            <th>Tarih</th>
+            <th>Fatura No</th>
+            <th>Tedarikçi</th>
+            <th>Ödeme Yöntemi</th>
+            <th>Net</th>
+
+          </tr>
+          </thead>
+
+          <tbody id="buyingRaw">
+
+
+          </tbody>
+
+
+
+
+        </table>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Kayıtlı tedarikçiden alış Modal -->
+  <div class="modal fade" id="registeredSupplier" tabindex="-1" >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #E53935;">
+          <h5 class="modal-title" style="color: white;"   id="cu_name">Alış</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="buyingTotal">
+
+          <div class="row ">
+
+            <div class="mb-3">
+              <label for="name" class="form-label"></label>
+              <select class="form-select" name="name" id="name">
+                <option value="">Tedarikçi Seçiniz</option>
+                <option th:each="item,iter : ${ls1}" th:value="${item.vid}" th:text="${item.vendor_name}"/>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="productName" class="form-label" >Ürün Arama</label>
+              <select class="form-select" name="productName" id="productName">
+                <option value="">Ürün seçiniz Seçiniz</option>
+
+                <option th:each="item,iter : ${ls3}" th:value="${item.getProduct_Id()}" th:text="${item.getProduct_Name()}"/>
+
+              </select>
+            </div>
+
+            <div id="Formtotal" class="mb-3">
+
+            </div>
+
+            <div class="mb-3">
+              <label for="billNumber" class="form-label" >Fatura No</label>
+              <input type="text" class="form-control" id="billNumber" >
+            </div>
+
+            <div class=" mb-3">
+              <label for="buying_date" class="form-label" style="color: #5c636a;font-family: Bahnschrift;font-size: large; ">Tarih</label>
+              <input type="date" name="buying_date" id="buying_date" class="form-control"  required  />
+
+            </div>
+
+            <div class="mb-3">
+              <select id="process" class="form-select" aria-label="Default select example" >
+                <option > İşlemler</option>
+                <option value="1"><i class="fas fa-money-bill-alt" > </i>Nakit</option>
+                <option value="2"><i class="fas fa-credit-card" ></i>Kredi Kartı</option>
+                <option value="3"><i class="fas fa-credit-card" > </i>Banka Havalesi</option>
+              </select>
+
+            </div>
+
+            <div id="pass_fail" class="invalid-feedback" style="display: block;">
+
+              Maksimum 1000 karakter girebilirsiniz
+            </div>
+
+            <div class="form-floating">
+              <textarea class="form-control" placeholder="Alış Notunuzu Giriniz" id="buyingNote"></textarea>
+              <label for="buyingNote">Alış notunuzu giriniz...</label>
+            </div>
+
+          </div>
+          <hr/>
+            <button id="addBuying" type="submit" class="btn btn-outline-primary" data-bs-dismiss="modal"> Kaydet</button>
+          </form>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Yeni Tedarikçiden alış Modal -->
+  <div class="modal" tabindex="-1" id="vendorModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #E53935;">
+          <h5 class="modal-title" style="color:white;">Yeni Tedarikçi Ekle</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form  id="addVendor" name="addVendor" >
+            <div class="mb-3">
+              <label for="vendor" class="form-label">Tedarikçi İsmi/Ünvanı</label>
+              <input type="text" class="form-control" id="vendor" aria-describedby="emailHelp">
+
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">E-mail</label>
+              <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">Telefon Numarası</label>
+              <input type="number" class="form-control" id="phone">
+            </div>
+            <hr/>
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Kapat</button>
+            <button type="submit" class="btn btn-outline-primary"><i class="fas fa-save"></i> Kaydet</button>
+
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="newProductAdd" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #E53935;">
+          <h5 class="modal-title" style="color: white"> Yeni Hızlı Ürün Ekle</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="row" id="productAdd" name="productAdd">
+            <div class="col-md-6 mb-3">
+              <label for="product_name" class="form-label" style="font-size: large; font-family: Bahnschrift;color: #5c636a">Ürün Adı</label>
+              <input type="text" name="product_name" id="product_name" class="form-control"  required />
+            </div>
+            <div class="col-md-6 mb-3">
+
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="product_unit" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Birim</label>
+              <select class="form-select" name="product_unit" id="product_unit">
+                <option value="">Seçiniz</option>
+                <option value="1">Adet</option>
+                <option value="2">Paket</option>
+                <option value="3">Şişe</option>
+
+
+              </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="category_group_cg_id" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Kategori</label>
+              <select class="form-select" name="category_group_cg_id" id="category_group_cg_id">
+                <option value=" "> Seçiniz</option>
+                <option th:each="item,iter : ${ls}" th:value="${item.cg_id}" th:text="${item.cg_name}"/>
+              </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="product_type" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Ürün Tipi</label>
+              <select class="form-select" name="product_type" id="product_type">
+                <option value="">Seçiniz</option>
+                <option value="1">Vitamin</option>
+                <option value="2">İlaç</option>
+                <option value="3">Mama</option>
+              </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="vendor_vid" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Tedarikçi</label>
+              <select class="form-select" name="vendor_vid" id="vendor_vid">
+                <option value=" "> Seçiniz</option>
+                <option th:each="item,iter : ${ls1}" th:value="${item.vid}" th:text="${item.vendor_name}"/>
+              </select>
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <label for="product_barcode" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Ürün Barkod</label>
+              <input type="number" name="product_barcode" id="product_barcode" class="form-control" />
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="product_code" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Ürün Kodu</label>
+              <input type="number" name="product_code" id="product_code" class="form-control" />
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="product_kdv" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">KDV</label>
+              <input type="number" name="product_kdv" id="product_kdv" class="form-control" />
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="product_buying" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Alış Fiyatı </label>
+              <input type="number" name="product_buying" id="product_buying" class="form-control" />
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="product_sales" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Satış Fiyatı</label>
+              <input type="number" name="product_sales" id="product_sales" class="form-control" />
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="product_stock" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Kritik Stok Miktarı</label>
+              <input type="number" name="product_stock" id="product_stock" class="form-control" />
+            </div>
+
+            <div class="form-check col-mb-3">
+              <input class="form-check-input" type="checkbox" value="" id="product_status">
+              <label class="form-check-label" for="product_status">
+                Aktif
+              </label>
+            </div>
+            <div class="form-check col-mb-3">
+              <input class="form-check-input" type="checkbox" id="product_sales_kdv" value=" ">
+              <label class="form-check-label" for="product_sales_kdv">Ürün satış fiyatına KDV dahil mi?</label>
+            </div>
+            <div class="form-check col-mb-3">
+              <input class="form-check-input" type="checkbox" id="product_buying_kdv" value=" ">
+              <label class="form-check-label" for="product_buying_kdv">Ürün alış fiyatına KDV dahil mi?</label>
+            </div>
+            <div class="form-check col-mb-3">
+              <input class="form-check-input" type="checkbox" id="product_amount_fixed" value=" ">
+              <label class="form-check-label" for="product_amount_fixed">Miktarlı satışlarda fiyat sabitlensin mi?</label>
+            </div>
+            <hr/>
+            <div class="mb-3">
+              <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Kapat</button>
+              <button type="submit" class="btn btn-outline-danger" ><i class="fas fa-save"></i> Ekle</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</th:block>
+
+</body>
+</html>
+<script th:src="@{js/buying.js}"></script>

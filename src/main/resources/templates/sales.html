@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="inc/layout">
+<head>
+  <meta charset="UTF-8">
+  <title>Satışlar</title>
+  <link rel="stylesheet" th:href="@{/sitecss/sales.css}">
+
+</head>
+<body>
+
+<th:block layout:fragment="content">
+  <div class="card mb-3">
+    <div class="card-body" style="background-color: #d7d8da">
+      <button  class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#retailModal"><i class="fas fa-shopping-cart"></i> Parekende Satış</button>
+      <button  class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#customerModal"><i class="fas fa-shopping-cart"></i> Kayıtlı Müşteriye Satış</button>
+    </div>
+  </div>
+
+
+  <div class="main-card mb-3 card mainCart mb-3">
+    <div class="card-header cardHeader mb-3" style="background-color: #FDD835; color: white; font-family: Bahnschrift; font-size: larger">Satışlar</div>
+    <div class="row mt-3" style="padding-right: 15px; padding-left: 15px;">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-3"></div>
+      <div class="col-sm-3"></div>
+
+      <div class="container">
+        <table class="align-middle mb-3 table table-borderless table-striped table-hover">
+          <thead>
+          <tr>
+            <th scope="col">Bid</th>
+            <th scope="col">Tarih</th>
+            <th scope="col">Fatura No</th>
+            <th scope="col">Müşteri Adı</th>
+            <th scope="col">Ödeme Yöntemi</th>
+            <th scope="col">Net</th>
+          </tr>
+          </thead>
+          <tbody id="salesRaw">
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="modal" tabindex="-1" id="retailModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #FDD835;">
+          <h5 class="modal-title" style="color: white;"   id="cu_name">Satış</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h3 style="color: #0F9DEF;">Parekende Sipariş</h3>
+          <form id="retailAdd">
+            <div mb-3>
+              <label for="retail_pro_search" class="form-label">Ürün Arama</label>
+              <select class="form-select" name="retail_pro_search" id="retail_pro_search">
+                <option value=" ">Ürün Seçiniz</option>
+                <option th:each="item,iter : ${ls}" th:value="${item.product_id}" th:text="${item.product_name}"/>
+              </select>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="sales_product_amount">Miktar</label>
+              <input type="number" class="form-control" id="sales_product_amount"  placeholder="Birim Giriniz">
+            </div>
+
+
+            <div class="mb-3">
+              <label for="sales_note" style="color: red"> Maksimum 1000 karakter girebilirsiniz. </label>
+              <div class="input-group">
+                <textarea id="sales_note" placeholder="Satış notu giriniz..." th:max="1000" class="form-control" aria-label="note"></textarea>
+              </div>
+            </div>
+
+
+            <button class="btn btn-outline-primary " type="submit" >Kaydet</button>
+
+          </form>
+          <hr/>
+
+          <h3 style="color: #0F9DEF">Parekende Ödeme</h3>
+        <form id="retailSaleAdd">
+          <div id="saleAdd" class="mb-3"></div>
+
+          <div class="mb-3">
+            <select id="sale_process" class="form-select" aria-label="Default select example" >
+              <option > İşlemler</option>
+              <option value="1"><i class="fas fa-money-bill-alt" > </i>Nakit</option>
+              <option value="2"><i class="fas fa-credit-card" ></i>Kredi Kartı</option>
+              <option value="3"><i class="fas fa-credit-card" > </i>Banka Havalesi</option>
+            </select>
+
+          </div>
+
+
+
+
+          <div class=" mb-3">
+            <label for="sale_date" class="form-label" style="color: #5c636a;font-family: Bahnschrift;font-size: large; ">Tarih</label>
+            <input type="date" name="sale_date" id="sale_date" class="form-control"  required  />
+
+          </div>
+
+          <hr/>
+
+          <button class="btn btn-outline-danger " type="submit" >Öde</button>
+
+        </form>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+<!-------------------------------------------------------------------------------------->
+  <div class="modal" tabindex="-1" id="customerModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #FDD835;">
+          <h5 class="modal-title" style="color: white;"   id="sales">Satış</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h3 style="color: #0F9DEF">Kayıtlı Müşteri Sipariş</h3>
+
+          <form id="customerOrder">
+            <div mb-3>
+              <label for="productName" class="form-label">Ürün Arama</label>
+              <select class="form-select" name="productName" id="productName">
+                <option value="">Ürün  Seçiniz</option>
+                <option th:each="item,iter : ${ls}" th:value="${item.product_id}" th:text="${item.product_name}"/>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="customerName" class="form-label">Müşteri Arama</label>
+              <select class="form-select" name="customerName" id="customerName">
+                <option value="">Hasta  Seçiniz</option>
+                <option th:each="item,iter : ${customerList}" th:value="${item.cid}" th:text="${item.c_name}"/>
+              </select>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="box_customer_amount">Birim</label>
+              <input type="number" class="form-control" id="box_customer_amount"  placeholder="Birim Giriniz">
+            </div>
+
+              <div class="mb-3">
+                <label for="customer_note" style="color: red"> Maksimum 1000 karakter girebilirsiniz. </label>
+                <div class="input-group">
+                  <textarea placeholder="Satış notu giriniz..." id="customer_note" th:max="1000" class="form-control" aria-label="note"></textarea>
+                </div>
+
+
+            </div>
+
+            <button class="btn btn-outline-primary " type="submit" >Kaydet</button>
+
+          </form>
+
+          <hr/>
+
+          <h3 style="color: #0F9DEF;">Kayıtlı Müşteri Ödeme</h3>
+          <form id="customerSale" >
+            <div id="saleCustomerAdd" class="mb-3"></div>
+
+
+            <div class="mb-3">
+              <select id="customer_process" class="form-select" aria-label="Default select example" >
+                <option value=""> İşlemler</option>
+                <option value="1"><i class="fas fa-money-bill-alt" > </i>Nakit</option>
+                <option value="2"><i class="fas fa-credit-card" ></i>Kredi Kartı</option>
+                <option value="3"><i class="fas fa-credit-card" > </i>Banka Havalesi</option>
+              </select>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="customerBillNumber">Fatura No</label>
+              <input type="number" class="form-control" id="customerBillNumber">
+            </div>
+
+
+
+            <div class=" mb-3">
+              <label for="box_cus_date" class="form-label" style="color: #5c636a;font-family: Bahnschrift;font-size: large; ">Tarih</label>
+              <input type="date" name="sale_date" id="box_cus_date" class="form-control"  required  />
+
+            </div>
+            <hr/>
+            <button class="btn btn-outline-danger " type="submit" >Öde</button>
+
+          </form>
+
+
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+</th:block>
+
+<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
+
+<script th:src="@{/js/sales.js}"></script>

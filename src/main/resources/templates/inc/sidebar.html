@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"   lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+
+</head>
+<body>
+
+<div th:fragment="sidebar" class="sidenav">
+
+  <h3 style= "color: white; text-align: center"> <i class="fas fa-cloud"></i> Bulutvet</h3>
+  <div style="background-color: white; height: 1px;"></div>
+  <a th:href="dashboard" ><i class="fas fa-home"></i> Ana Sayfa</a>
+
+  <button class="dropdown-btn" ><i class="fas fa-users"></i> Müşteriler
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a th:href="newCustomerAdd">Yeni Müşteri Ekle</a>
+    <a th:href="customerSearch">Müşteri Listesi</a>
+
+  </div>
+
+  <a th:href="calendar" ><i class="fas fa-calendar-alt" > </i> Randevu Takvimi</a>
+  <a th:href="sales" ><i class="fas fa-shopping-cart" > </i> Satış</a>
+  <a th:href="buying" ><i class="fas fa-truck" > </i> Alış</a>
+  <a th:href="laboratuvar" ><i class="fas fa-flask" > </i> Laboratuvar</a>
+  <a th:href="payAction" ><i class="fas fa-money-bill-alt" > </i> Kasa Hareketi</a>
+  <button class="dropdown-btn" ><i class="fas fa-boxes"> </i> Ürün/Aşı Tanım
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a th:href="productDescription">Ürün Tanım</a>
+    <a th:href="vaccineDescription">Aşı Tanım</a>
+  </div>
+  <a th:href="vendor" ><i class="fas fa-parachute-box" > </i> Tedarikçiler</a>
+  <a th:href="agenda" ><i class="fas fa-bell" ></i>  Ajandam</a>
+  <a th:href="depo" ><i class="fas fa-store" > </i> Depo</a>
+  <a th:href="clinicalStatistics" ><i class="fas fa-chart-bar" > </i> Klinik İstatistikler</a>
+
+  <button class="dropdown-btn" ><i class="fas fa-plus-square"> </i> Tanımlamalar
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a th:href="newCaseDescription">Kasa</a>
+    <a th:href="CategoryDescription">Kategori</a>
+  </div>
+
+  <a th:href="settings"><i class="fas fa-cog" > </i> Ayarlar</a>
+  <a th:href="login" ><i class="fas fa-lock" > </i> Çıkış</a>
+
+
+</div>
+
+
+</body>
+</html>

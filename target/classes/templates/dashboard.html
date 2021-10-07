@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="inc/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Anasayfa</title>
+    <link rel="stylesheet" th:href="@{/sitecss/dashboard.css}">
+
+
+</head>
+<body>
+
+<th:block layout:fragment="content">
+    <div class="container">
+        <div class="row ">
+
+
+            <div class="col col-sm-6 mb-4">
+                <div class="card cardBackground1" id="card">
+                    <div class="card-body">
+                        <div style=" text-align: center; justify-content: space-between;">
+                            <h4>Toplam Satış Miktarı</h4>
+                            <hr/>
+                            <h4><strong th:text="${sum2}">  </strong></h4>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col col-sm-6 mb-4">
+                <div class="card cardBackground5" id="card">
+                    <div class="card-body">
+                        <div style=" text-align: center; justify-content: space-between;">
+                            <h4>Toplam Kazanım</h4>
+                            <hr/>
+                           <h4 ><strong th:text="${sum}">  </strong> </h4>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col col-sm-6 mb-4">
+                <div class="card cardBackground4" id="card">
+                    <div class="card-body">
+                        <div style=" text-align: center; justify-content: space-between;">
+                            <h4>Toplam Stok Değeri</h4>
+                            <hr/>
+                            <h4><strong id="st">  </strong></h4>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col col-sm-6 mb-4">
+                <div class="card cardBackground6" id="card">
+                    <div class="card-body">
+                        <div style=" text-align: center; justify-content: space-between;">
+                            <h4 style="color: white" >Toplam Müşteri Sayısı</h4>
+                            <hr/>
+                            <h4><strong id="cs">  </strong></h4>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col">
+            <div class="main-card mb-3 card"
+                 style="box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%), 0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);border-width: 0;">
+                <div class="card-header" style="text-transform: uppercase;color: white;);font-weight: 700; font-size: 0.88rem; background: #0F9DEF "><i class="fas fa-calendar-alt"></i> Randevular</div>
+
+                <div class="container">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+
+                            <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Başlık</th>
+                            <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Başlangıç</th>
+                            <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Bitiş</th>
+
+                        </tr>
+                        </thead>
+
+
+
+                        <tbody id="randevu">
+                        </tbody>
+
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+</th:block>
+
+
+</body>
+</html>
+<script th:src="@{js/dashboard.js}"></script>

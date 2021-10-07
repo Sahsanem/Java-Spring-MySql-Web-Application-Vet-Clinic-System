@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="inc/layout">
+<head>
+  <meta charset="UTF-8">
+  <title>Ayarlar</title>
+  <link rel="stylesheet" th:href="@{/sitecss/settings.css}">
+
+</head>
+<body>
+
+<th:block layout:fragment="content">
+  <div class="card mb-3">
+    <div class="card-body" style="background-color: #d7d8da">
+      <button  class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#userModal"><i class="fas fa-save"></i> Yeni Kullanıcı Ekle</button>
+    </div>
+  </div>
+
+  <div class="main-card mb-3 card mainCart mb-3">
+    <div class="card-header cardHeader mb-3" style="background-color: #00897B; color: white; font-family: Bahnschrift; font-size: larger">Kullanıcılar</div>
+    <div class="row mt-3" style="padding-right: 15px; padding-left: 15px;">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-3"></div>
+      <div class="col-sm-3"></div>
+      <div class="col-sm-3">
+        <div class="input-group flex-nowrap">
+          <span class="input-group-text" id="addon-wrapping"><i class="fas fa-search"></i></span>
+          <input type="text" name="usearch" id="usearch" class="form-control" placeholder="Arama.." aria-label="User" aria-describedby="addon-wrapping">
+          <button  class="btn btn-outline-primary">Ara</button>
+        </div>
+      </div>
+      <div class="container">
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">Adı</th>
+            <th scope="col">Soyadı</th>
+            <th scope="col">Telefon</th>
+            <th scope="col">Email</th>
+
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="item, iter : ${userList}">
+            <th th:text="${item.firstName}"></th>
+            <th th:text="${item.lastName}"></th>
+            <th th:text="${item.phone}"></th>
+            <th th:text="${item.email}"></th>
+
+
+
+          </tr>
+
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal" tabindex="-1" id="userModal">
+    <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #00897B;">
+          <h5 class="modal-title" style="color:white;">Kullanıcı Ekle / Bilgi Güncelle</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h4 style="text-align: center;">Kullanıcı Bilgileri</h4>
+          <hr/>
+          <form th:action="@{'/settings/register'}" method="post">
+            <div class="mb-3">
+              <label for="firstName" class="form-label">İsim</label>
+              <input type="text" class="form-control" id="firstName" name="firstName">
+            </div>
+            <div class="mb-3">
+              <label for="lastName" class="form-label">Soyisim</label>
+              <input type="text" class="form-control" id="lastName" name="lastName">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">E-mail</label>
+              <input type="email" class="form-control" id="email" name="email">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Şifre</label>
+              <input type="password" class="form-control" id="password" name="password">
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">Telefon</label>
+              <input type="tel"  class="form-control" id="phone" name="phone" >
+            </div>
+
+            <label for="select" class="form-label">Rol</label>
+            <select name="roleIDSt" class="form-select" id="select">
+              <option value="">Rol Seçiniz</option>
+              <option value="1">Müşteri</option>
+              <option value="2">Admin</option>
+              <option value="3">Doktor</option>
+              <option value="4">Sekreter</option>
+            </select>
+
+        <hr/>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class="fas fa-times"></i> Kapat</button>
+          <button type="submit" class="btn btn-outline-success" ><i class="fas fa-save"></i> Kaydet</button>
+        </div>
+      </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+</th:block>
+
+
+
+</body>
+</html>

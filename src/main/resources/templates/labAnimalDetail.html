@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="inc/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Hayvan Detay</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+
+    <div class="card mb-3">
+        <div class="card-body" style="background-color: #d7d8da">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#resultAddModel"><i class="fas fa-save"></i> Sonuç Ekle</button>
+        </div>
+    </div>
+    <div class="row">
+    <div class="col-sm-4">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Mutlu</h5>
+                <hr>
+                <p class="card-text">Cinsi</p>
+                <hr>
+                <p class="card-text">Cinsiyet</p>
+                <hr>
+                <p class="card-text">Doğum Tarihi</p>
+                <hr>
+                <p class="card-text">Renk</p>
+                <hr>
+                <p class="card-text">Karne No</p>
+                <hr>
+                <p class="card-text">Çip No</p>
+                <hr>
+                <p class="card-text">Not</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8 mb-3">
+        <div class="main-card mb-3 card mainCart mb-3">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Sonuç Tarihi</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">Laboratuvar Türü</th>
+                    <th scope="col"  style="font-size: large; font-family: Bahnschrift;color: #5c636a">İşlem</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td scope="row">12.12.21 </td>
+                    <td>AKT</td>
+                    <td>Ana Depo</td>
+
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+    </div>
+    <!--Sonuç Ekle Başlangıç-->
+    <div class="modal fade" id="resultAddModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #0d6efd;">
+                    <h5 class="modal-title" style="color: white">Laboratuvar Sonucu Ekle</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row p-3">
+                        <div class="mb-3">
+                            <label for="lab_type" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Laboratuvar Tipi</label>
+                            <select class="form-select" name="lab_type" id="lab_type">
+                                <option value="">Seçiniz</option>
+                                <option value="1">Röntgen</option>
+                                <option value="2"></option>
+                                <option value="3"></option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFileSm" class="form-label">Dosya Yükle</label>
+                            <input class="form-control form-control-sm" id="formFileSm" type="file">
+                        </div>
+                        <div class="mb-3">
+                            <label for="teshis" class="form-label" style="font-size: large; font-family: Bahnschrift;color: #5c636a">Teşhis</label>
+                            <input type="text" name="teshis" id="teshis" class="form-control"  required />
+                        </div>
+                    </form>
+                </div>
+                </hr>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-info" data-bs-dismiss="modal">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!---Sonuç Ekle Bitiş--->
+</th:block>
+</body>
+</html>

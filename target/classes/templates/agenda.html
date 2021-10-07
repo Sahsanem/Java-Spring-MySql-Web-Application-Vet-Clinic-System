@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="inc/layout">
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ajandam</title>
+
+</head>
+<body>
+
+<th:block layout:fragment="content">
+
+  <div class="main-card mb-3 card mainCart mb-3">
+    <div class="card-header cardHeader mb-3" style="background-color: #00897B; color: white; font-family: Bahnschrift; font-size: larger">Ajandam</div>
+
+    <form id="agenda" name="agenda" class="row p-3">
+      <div class="col-md-6 mb-3">
+        <label for="agenda_title" class="form-label" style="font-size: large; font-family: Bahnschrift;color: #5c636a">Başlık</label>
+        <input type="text" name="agenda_title" id="agenda_title" class="form-control"  required />
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="agenda_date" class="form-label" style="color: #5c636a;font-family: Bahnschrift;font-size: large; ">Tarih</label>
+        <input type="date" name="agenda_date" id="agenda_date" class="form-control"  required  />
+
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="agenda_desc" class="form-label">Açıklama</label>
+        <textarea class="form-control" id="agenda_desc" ></textarea>
+
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="agenda_hours" class="form-label" style="color: #5c636a;font-family: Bahnschrift;font-size: large; ">Saat</label>
+        <input type="text" name="agenda_hours" id="agenda_hours" class="form-control"  required  />
+
+      </div>
+
+      <div class="col-md-6"></div>
+      <div class="form-check col-md-6 mb-3">
+        <input  class="form-check-input" type="checkbox" value="" id="activeChecked" >
+        <label class="form-check-label" for="activeChecked">
+          Aktif
+        </label>
+      </div>
+
+      <div class="col-md-6"></div>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn btn-outline-success" type="submit"><i class="fas fa-save"></i> Kaydet</button>
+      </div>
+    </form>
+  </div>
+
+
+  <div class="main-card mb-3 card mainCart">
+    <div class="card-header cardHeader" style="background-color:#00897B; color: white; font-family: Bahnschrift; font-size: larger; " >Geçmiş/Bekleyen Notlar</div>
+
+    <div class="row mt-3" style="padding-right: 15px; padding-left: 15px;">
+
+      <div class="table-responsive">
+        <table class="align-middle mb-3 table table-borderless table-striped table-hover">
+
+          <thead>
+          <tr>
+            <th>Id</th>
+            <th>Başlık</th>
+            <th>Açıklama</th>
+            <th>Tarih</th>
+            <th>Saat</th>
+            <th>Durum</th>
+            <th>Yönetim</th>
+
+
+          </tr>
+          </thead>
+
+          <tbody id="agendaRaw">
+
+
+          </tbody>
+
+
+
+
+        </table>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+
+</th:block>
+
+
+
+</body>
+</html>
+
+<script th:src="@{js/agenda.js}"></script>
+

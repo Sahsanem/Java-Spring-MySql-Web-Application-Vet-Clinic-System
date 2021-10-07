@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Giriş Yap</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/sitecss/login.css}">
+</head>
+<body >
+
+
+<div class="bg-img">
+  <div class="container" >
+    </br>
+    </br>
+    </br>
+    </br>
+
+
+    <div class=" col-sm-6">
+
+      <h2>Buluvet'e Hoşgeldiniz!</h2>
+      <p>Giriş yapmak için lütfen bilgileri giriniz.</p>
+      <form th:action="@{/login}" method="post">
+
+        <div class="mb-3">
+
+          <input type="text" class="form-control" id="username" name="username" placeholder="Email">
+        </div>
+
+        <div class="mb-3">
+          <input type="password" class="form-control" name="password" id="password" placeholder="Şifre">
+        </div>
+        <div class="mb-3">
+          <a th:href="register" type="button" class="btn btn-primary">Yeni Üye Oluştur</a>
+          <button type="submit" class="btn btn-success">Giriş yap</button>
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+
+</div>
+
+
+
+<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

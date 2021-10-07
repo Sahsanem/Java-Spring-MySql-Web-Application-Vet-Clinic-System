@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="inc/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Yeni Müşteri Ekleme</title>
+
+
+</head>
+<body>
+
+
+<th:block layout:fragment="content">
+
+
+    <div class="main-card mb-3 card mainCart mb-3">
+        <div class="card-header cardHeader mb-3" style="background-color: #D81B60; color: white; font-family: Bahnschrift; font-size: larger">Müşteri Bilgileri</div>
+
+        <form name="customerAdd" id="customerAdd" class="row p-3">
+            <div class="col-md-6 mb-3">
+                <label for="c_name" class="form-label" style="font-size: large; font-family: Bahnschrift;color: #5c636a">Hasta Sahibi Adı</label>
+                <input type="text" name="c_name" id="c_name" class="form-control" placeholder="Adınızı Yazınız" required />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="c_surname" class="form-label" style="color: #5c636a;font-family: Bahnschrift;font-size: large; ">Hasta Sahibi Soyadı</label>
+                <input type="text" name="c_surname" id="c_surname" class="form-control" placeholder="Soyadınızı Yazınız" required  />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="c_phone" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Telefon Numarası</label>
+                <input type="text" name="c_phone" id="c_phone" class="form-control" placeholder="Telefon Numarası Yazınız" required  />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="c_mobile_phone" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">2.Telefon Numarası</label>
+                <input type="text" name="c_mobile_phone" id="c_mobile_phone" class="form-control" placeholder="Varsa 2.Telofon Numarası Yazınız"  />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="c_email" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">E-Mail</label>
+                <input type="email" name="c_email" id="c_email" class="form-control" placeholder="E-mail Adresinizi Yazınız"/>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="tax_administration" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Vergi Dairesi</label>
+                <input type="text" name="tax_administration" id="tax_administration" placeholder="Vergi Dairesi Adını Yazınız" class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="c_note" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Not</label>
+                <input type="text" name="c_note" id="c_note" class="form-control" placeholder="Varsa Notunuzu Giriniz" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="tc_no" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Vergi No / Tc No</label>
+                <input type="text" name="tc_no" id="tc_no" class="form-control" placeholder="Vergi No / TC No Giriniz" required />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="il" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">İl</label>
+                <input type="text" name="il" id="il" class="form-control" placeholder="İl Bilgisi Giriniz" required  />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="ilce" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">İlçe</label>
+                <input type="text" name="ilce" id="ilce" class="form-control" placeholder="İlçe Bilgisi Giriniz"   />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="address" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Adres</label>
+                <input type="text" name="address" id="address" class="form-control" placeholder="Adres Bilgisi Giriniz" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="c_no" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Müşteri No</label>
+                <input name="c_no" type="text" id="c_no" class="form-control" placeholder="Müşteri No Giriniz" required>
+            </div>
+
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="mb-3 col-md-6">
+                <label for="c_code" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Müşteri İndirim Oranı</label>
+                <span class="input-group-text" id="c_code">%</span>
+                <input type="text" class="form-control" placeholder="%Oranı" aria-label="%Oranı" aria-describedby="c_code">
+            </div>
+
+
+            <div class="col-sm-3 mb-3"></div>
+            <div class="col-sm-3 mb-3"></div>
+            <div class="col-sm-3 mb-3"></div>
+            <div class="col-sm-3 mb-3 ">
+                <button type="submit" class="btn btn-outline-primary">Kaydet</button>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="main-card mb-3 card mainCart">
+        <div class="card-header cardHeader" style="background-color: #D81B60; color: white; font-family: Bahnschrift; font-size: larger">Hasta Bilgileri</div>
+        <div class="row">
+            <div class="col-sm-3 mb-3"></div>
+            <div class="col-sm-3 mb-3"></div>
+            <div class="col-sm-3 mb-3"></div>
+
+        </div>
+        <form class="row p-3" id="addAnimal" name="addAnimal">
+            <div class="col-md-4 mb-3">
+                <label for="p_name" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Hasta Adı</label>
+                <input type="text" name="p_name" id="p_name" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="cus_no" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Müşteri No</label>
+                <input name="cus_no" type="text" id="cus_no" class="form-control" placeholder="Müşteri No Giriniz" required>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="cip_no" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Çip Numarası</label>
+                <input type="number" name="cip_no" id="cip_no" class="form-control" required />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="karne_no" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Karne/Küpe Numarası</label>
+                <input type="number" name="karne_no" id="karne_no" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="p_birth" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Doğum Tarihi</label>
+                <input type="date" name="p_birth" id="p_birth" class="form-control" />
+            </div>
+
+
+            <div class="col-md-4 mb-3">
+                <label for="p_type" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Tür</label>
+                <input name="p_type" type="text" id="p_type" class="form-control" placeholder="Türünü Giriniz" required>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="form-check" style="border-inline: #4f5050">
+                    <label class="form-check-label" for="spayed">
+                        Kısırlaştırılmış
+                    </label>
+                    <input class="form-check-input" type="checkbox" value=" " id="spayed" name="spayed">
+
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="p_race" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Irkı</label>
+                <input name="p_race" type="text" id="p_race" class="form-control" placeholder="Irkını Giriniz" required>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label for="pcolor" class="form-label" style="font-family: Bahnschrift;font-size: large;color: #5c636a">Rengi</label>
+                <input type="text" name="pcolor" id="pcolor" class="form-control" />
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label  style="font-family: Bahnschrift;font-size: large;color: #5c636a">Cinsiyet</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="drone" id="gender1" value="1" >
+                    <label class="form-check-label" for="gender1">
+                        Dişi
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="drone" id="gender2" value="2">
+                    <label class="form-check-label" for="gender2">
+                        Erkek
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <button  class="btn btn-outline-danger mr-1 p-6"> <i class="fas fa-trash"></i> Sil</button>
+                <button type="submit" id="btnsubmitSend" class="btn btn-outline-primary mr-1">Kaydet</button>
+            </div>
+
+
+
+        </form>
+
+    </div>
+
+
+
+</th:block>
+
+</body>
+</html>
+<script th:src="@{js/newCustomerAdd.js}"></script>

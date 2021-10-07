@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="inc/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Müşteri Arama</title>
+    <link rel="stylesheet" th:href="@{/sitecss/settings.css}">
+
+
+</head>
+<body>
+
+
+<th:block layout:fragment="content">
+    <div class="main-card mb-3 card mainCart mb-3">
+        <div class="card-header cardHeader mb-3" style="background-color: #D81B60; color: white; font-family: Bahnschrift; font-size: larger">Müşteriler</div>
+        <div class="row mt-3" style="padding-right: 15px; padding-left: 15px;">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fas fa-search"></i></span>
+                    <input type="text" name="name" id="name" class="form-control"  placeholder="Arama.." aria-label="Customer" aria-describedby="addon-wrapping">
+                    <button id="c_search" name="c_search" type="button" class="btn btn-outline-primary">Ara</button>
+                </div>
+            </div>
+            <div class="container">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Adı ve Soyadı</th>
+                        <th scope="col">Telefon</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">TC No</th>
+                        <th scope="col">Notu</th>
+                        <th scope="col">Adres</th>
+
+
+                    </tr>
+                    </thead>
+                    <tbody id="customerTable">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+
+</body>
+
+</html>
+
+<script th:src="@{js/customerSearch.js}"></script>
+<script th:src="@{js/newCustomerAdd.js}"></script>
+
+

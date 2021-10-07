@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Müşteri Kayıt</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/sitecss/register.css}">
+</head>
+<body>
+
+<div class="bg-img">
+  <div class="container">
+    <div class="col-sm-6">
+      </br>
+      </br>
+      </br>
+
+      <h2>Buluvet'e Hoşgeldiniz!</h2>
+      <p>Bulutvet'e üye olmak için bilgileri doldurunuz.</p>
+      <form th:action="@{'/register'}" method="post">
+        <div class="mb-3">
+
+          <input type="text" class="form-control" id="firma" name="firma" placeholder="Firma Adı">
+        </div>
+        <div class="mb-3">
+
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+        </div>
+        <div class="mb-3">
+
+          <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Cep Telefonu">
+        </div>
+        <div class="mb-3">
+
+          <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Adı">
+        </div>
+        <div class="mb-3">
+
+          <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Soyadı">
+        </div>
+        <div class="mb-3">
+
+          <input type="password" class="form-control" name="password" id="password" placeholder="Şifre">
+        </div>
+        <div class="mb-3">
+          <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+          <a th:href="login" type="button" class="btn btn-primary">Zaten Üyeyim</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>
+
+
+
+
+

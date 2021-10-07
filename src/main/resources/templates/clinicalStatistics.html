@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="inc/layout">
+<head>
+  <meta charset="UTF-8">
+  <title>Klinik İstatistik</title>
+  <link rel="stylesheet" th:href="@{/sitecss/clinic.css}">
+
+</head>
+<body>
+
+<th:block layout:fragment="content">
+
+  <div class="main-card mb-3 card mainCart mb-3">
+    <div class="card-header cardHeader mb-3" style="background-color: #FDD835; color: white; font-family: Bahnschrift; font-size: larger">Klİnİk İstatİstİklerİ</div>
+    <div class="container">
+    <div class="row">
+      <div class="col col-sm-6 mb-4">
+        <div class="card cardBackground1" id="card">
+          <div class="card-body">
+            <div style=" text-align: center; justify-content: space-between;">
+              <h4>Toplam Randevu Sayısı</h4>
+              <hr/>
+              <h4><strong id="rd">  </strong></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col col-sm-6 mb-4">
+        <div class="card cardBackground5"  id="card">
+          <div class="card-body">
+            <div style=" text-align: center; justify-content: space-between;">
+              <h4>Toplam Hasta Sayısı</h4>
+              <hr/>
+              <h4><strong id="a">0  </strong></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col col-sm-6 mb-4" style=" margin: auto;
+  width: 50%;
+  padding: 10px;">
+        <div class="card cardBackground4"  id="card">
+          <div class="card-body">
+            <div style=" text-align: center; justify-content: space-between;">
+              <h4>Çıkan Laboratuvar Sonuçları</h4>
+              <hr/>
+              <h4><strong th:text="${countlab}">0  </strong></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    </div>
+  </div>
+
+
+
+
+  <div class ="row">
+    <div class="col-md-6">
+
+      <div class="main-card mb-3 card mainCart">
+        <div class="card-header cardHeader" style="background-color: #FDD835; color: white; font-family: Bahnschrift; font-size: larger; " >Hangİ MÜŞterİ Ne Kadar Kazandırdı?</div>
+
+        <div class="row mt-3" style="padding-right: 15px; padding-left: 15px;">
+
+          <div class="table-responsive">
+            <table class="align-middle mb-3 table table-borderless table-striped table-hover">
+
+              <thead>
+              <tr>
+                <th>Adı Soyadı</th>
+                <th>Ödeme Tipi</th>
+                <th>Toplam Harcama</th>
+
+
+
+              </tr>
+              </thead>
+              <tbody id="clinicSale">
+
+
+              </tbody>
+
+
+
+
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="col-md-6">
+
+      <div class="main-card mb-3 card mainCart">
+        <div class="card-header cardHeader" style="background-color: #FDD835; color: white; font-family: Bahnschrift; font-size: larger; " >Ödeme Tİpİne GÖre Toplam KazanÇ</div>
+
+        <div class="row mt-3" style="padding-right: 15px; padding-left: 15px;">
+
+          <div class="table-responsive">
+            <table class="align-middle mb-3 table table-borderless table-striped table-hover">
+
+              <thead>
+              <tr>
+                <th>Toplam Kazanç</th>
+                <th>Ödeme Tipi</th>
+                <th>Yıl</th>
+              </tr>
+              </thead>
+
+              <tbody id="listProcess">
+
+
+              </tbody>
+
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+</th:block>
+
+
+</body>
+</html>
+
+
+<script th:src="@{/js/clinic.js}"></script>
