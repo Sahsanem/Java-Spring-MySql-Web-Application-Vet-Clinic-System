@@ -1,6 +1,7 @@
 # Java Spring MySql Web Application Vet Clinic System
 
 ## Uygulama Açıklaması
+Veteriner Klinik, bir veteriner klinik sistemi kontrol uygulamasıdır. Sisteme giriş yaparak ulaşılabilmektedir. Kayıt kısmından kayıt olan her kullanıcıya müşteri rolü default olarak eklenmektedir. Diğer rollere sahip kullanıcılar ayarlar sayfasından eklenmelidir. Kullanıcıların rollerine göre erişebilecekleri sayfalar farklıdır. Müşteri ve hayvanı eklenebilir, silinebilir ve listelenebilmektedir. Takvim sayfasından randevu eklenebilir. Admin rolüne sahip kullanıcılar ajanda sayfasında işlem yapabilir. Laboratuvar sayfasından hastaya ait laboratuvar sonuç tipine göre sonuç eklenebilir, silinebilir ve listelenebilmektedir. Aşı ve ürün alım satımı yapılabilmektedir. Ürün ve aşılar depolara eklenebilir, silinebilir ve güncellenbilirler. Tedarikçi, depo, kategori kısımları eklenebilir, silinebilir ve listelenbilmektedirler.
 
 ## Kullanıcı Bilgileri
 
